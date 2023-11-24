@@ -1,7 +1,7 @@
 export type T_Result = {
+  wrongAnswers: number;
   score: number;
   correctAnswers: number;
-  wrongAnswer: number;
 };
 
 export type Question = {
@@ -15,6 +15,6 @@ export type Option = {
 
 export type OptionsProps = {
   answers: Option[];
-  selectedAnswer: string;
-  onSelect: (answer: string) => void;
+  selectedAnswer: string | boolean;
+  onClick: (answer: string) => void;
 };

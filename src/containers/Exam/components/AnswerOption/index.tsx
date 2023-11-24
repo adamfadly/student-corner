@@ -3,15 +3,14 @@ import { OptionsProps, Option } from "../../types";
 const AnswerOption: React.FC<OptionsProps> = ({
   answers,
   selectedAnswer,
-  onSelect,
+  onClick,
 }) => {
   return (
     <div>
       {answers.map((option: Option, idx) => (
-        <div className="flex flex-col gap-5">
+        <div key={idx} className="flex flex-col gap-5">
           <button
-            key={idx}
-            onClick={() => onSelect(option.text)}
+            onClick={() => onClick(option.text)}
             className={`p-4 my-2 rounded w-[200px] ${
               selectedAnswer === option.text
                 ? "bg-gray-800 text-white"
