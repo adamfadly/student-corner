@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { T_Result } from "./types";
 import { qNa } from "./constant";
 
@@ -7,22 +7,28 @@ import Question from "./components/Question";
 import AnswerOption from "./components/AnswerOption";
 import { useRouter } from "next/navigation";
 
+import { useExamResult } from "@/store/Exam/examResult";
+
 const ExamContainer: React.FC = () => {
   const { questions } = qNa;
   const router = useRouter();
 
   const [activeQuestion, setActiveQuestion] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
-  const [checked, setChecked] = useState<boolean>(false);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<null>(null);
-  const [showResult, setShowresult] = useState<boolean>(false);
   const [result, setResult] = useState<T_Result>({
     score: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
+    totalQuestions: questions.length,
   });
 
   const { answers, correctAnswer } = questions[activeQuestion];
+
+  const { updateResultExam } = useExamResult();
+
+  // useEffect(() => {
+  //   console.log(result, "CTX");
+  // }, [result]);
 
   const onSelectedAnswer = (selectedAnswer: string) => {
     const isCorrect = selectedAnswer === correctAnswer;
@@ -32,7 +38,10 @@ const ExamContainer: React.FC = () => {
         : result.correctAnswers,
       score: isCorrect ? result.score + 1 : result.score,
       wrongAnswers: !isCorrect ? result.wrongAnswers + 1 : result.wrongAnswers,
+      totalQuestions: questions.length,
     });
+    updateResultExam(result);
+
     setSelectedAnswer("");
   };
 
@@ -42,7 +51,7 @@ const ExamContainer: React.FC = () => {
       onSelectedAnswer(selectedAnswer);
     } else {
       onSelectedAnswer(selectedAnswer);
-      router.push("/dashboard");
+      router.push("/exam/result");
       console.log("Finish");
     }
   };

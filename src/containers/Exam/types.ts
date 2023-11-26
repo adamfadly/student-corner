@@ -2,6 +2,7 @@ export type T_Result = {
   wrongAnswers: number;
   score: number;
   correctAnswers: number;
+  totalQuestions: number;
 };
 
 export type Question = {
