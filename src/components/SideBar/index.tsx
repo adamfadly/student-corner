@@ -9,9 +9,12 @@ const SideBar: React.FC = () => {
       <div className="p-4">
         Dashboard Menu
         <div className=" flex flex-col ">
-          {/* <Link href="/dashboard">Dashboard</Link> */}
-          <Link href="/dashboard/contact">Contact</Link>
-          <Link href="/dashboard/about">About</Link>
+          <div>
+            <Link href="/dashboard">Dashboard</Link>
+          </div>
+          <div className="mt-4">
+            <Link href="/dashboard/exam-list">Exams</Link>
+          </div>
         </div>
       </div>
     </div>

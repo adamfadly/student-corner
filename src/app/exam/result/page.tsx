@@ -1,4 +1,4 @@
-import ResultPage from "@/containers/Result";
+import ResultPage from "@/containers/Exam/ExamResult";
 import React from "react";
 
 const Page = () => {
